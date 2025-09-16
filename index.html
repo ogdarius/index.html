@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aim - Sistema de Checagem</title>
+    <link rel="icon" href="https://cdn.discordapp.com/attachments/1417540586172583968/1417565335082766539/IMG_0795.jpg" type="image/jpeg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #ffffff;
+            --accent-color: #1a1a1a;
+            --card-bg: #0d0d0d;
+            --success-color: #00ff00;
+            --error-color: #ff3333;
+            --text-secondary: #aaaaaa;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(40, 40, 40, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(30, 30, 30, 0.15) 0%, transparent 25%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease;
+        }
+
+        .logo-text {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--secondary-color), #cccccc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .logo-subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .step {
+            display: none;
+            animation: slideUp 0.5s ease;
+            width: 100%;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid #333;
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .message-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .message-content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .highlight {
+            color: var(--secondary-color);
+            font-weight: 600;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 10px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        .btn-next {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-telegram {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-close {
+            background-color: var(--error-color);
+            color: white;
+        }
+
+        .btn-start {
+            background-color: var(--success-color);
+            color: var(--primary-color);
+        }
+
+        .btn-stop {
+            background-color: var(--error-color);
+            color: white;
+        }
+
+        .btn-access {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 16px;
+            margin: 16px 0;
+            background-color: var(--accent-color);
+            border: 1px solid #444444;
+            border-radius: 8px;
+            color: var(--secondary-color);
+            font-family: 'Courier New', monospace;
+            min-height: 180px;
+            resize: vertical;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .key-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 16px;
+            background-color: var(--accent-color);
+            border: 1px solid #444444;
+            border-radius: 8px;
+            color: var(--secondary-color);
+            text-align: center;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            margin: 20px 0;
+        }
+
+        .key-input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .access-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        .results {
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .result-item {
+            padding: 14px;
+            margin: 12px 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideIn 0.4s ease;
+            border-left: 5px solid transparent;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .result-item:hover {
+            transform: translateX(5px);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .approved {
+            border-left-color: var(--success-color);
+        }
+
+        .rejected {
+            border-left-color: var(--error-color);
+        }
+
+        .result-status {
+            font-weight: bold;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            min-width: 90px;
+            text-align: center;
+        }
+
+        .status-approved {
+            background-color: var(--success-color);
+            color: var(--primary-color);
+        }
+
+        .status-rejected {
+            background-color: var(--error-color);
+            color: white;
+        }
+
+        .charts {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .chart-container {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid #333;
+            height: 100%;
+        }
+
+        .chart-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chart-title i {
+            margin-right: 10px;
+        }
+
+        canvas {
+            width: 100% !important;
+            height: 300px !important;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .stat-box {
+            background-color: var(--accent-color);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #333;
+            transition: var(--transition);
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .stat-approved {
+            color: var(--success-color);
+        }
+
+        .stat-rejected {
+            color: var(--error-color);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .security-badge i {
+            margin-right: 8px;
+            color: var(--success-color);
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+            100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
+        }
+
+        .glowing {
+            animation: glow 2s infinite;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .logo-text {
+                font-size: 2.8rem;
+            }
+
+            .logo-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .message-content {
+                font-size: 1rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 80%;
+                margin: 8px 0;
+            }
+
+            .chart-title {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+
+            .logo-text {
+                font-size: 2.2rem;
+            }
+
+            .card {
+                padding: 15px;
+            }
+
+            .input-field {
+                font-size: 0.9rem;
+                min-height: 150px;
+            }
+
+            .result-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .result-status {
+                margin-top: 10px;
+                align-self: flex-end;
+            }
+
+            .stat-value {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--accent-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #444;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Indicador de progresso */
+        .progress-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .progress-step {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #444;
+            margin: 0 8px;
+            transition: var(--transition);
+        }
+
+        .progress-step.active {
+            background-color: var(--secondary-color);
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <div class="logo-text">AIM</div>
+            <div class="logo-subtitle">CHK</div>
+        </div>
+
+        <div class="progress-indicator">
+            <div class="progress-step active" id="step1-indicator"></div>
+            <div class="progress-step" id="step2-indicator"></div>
+            <div class="progress-step" id="step3-indicator"></div>
+            <div class="progress-step" id="step4-indicator"></div>
+        </div>
+
+        <!-- Etapa 1: Mensagem de boas-vindas -->
+        <div id="step1" class="step active">
+            <div class="card">
+                <div class="message-content">
+                    <p>Salve rapaziada.</p>
+                    <p>Eu sou o Darius, fiz esse CHK aqui só por diversão e está totalmente funcional e espero que gostem. Tanto que, o domínio e VPS que estou hospedando ele agora, foi graças a um recheck que fiz usando ele mesmo, e consegui aprovar essas duas coisas.</p>
+                    <p>Mas uma coisinha que vocês já desconfiam e vou deixar claro:</p>
+                    <p>1. <span class="highlight">Aim tenho certeza que você coleta meus cc live.</span></p>
+                    <p>R: Se eu quero compro. (ouviu kz?)</p>
+                    <p>2. <span class="highlight">Certeza que é fake, não testa se é live ou die de verdade.</span></p>
+                    <p>R: Testa sim, debita um valor aleatório, se o banco autorizar a transação é exibido como aprovado.</p>
+                    <p>É isso rapaziada, espero que gostem!</p>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-next" onclick="nextStep(2)">
+                    <i class="fas fa-arrow-right"></i> Próximo
+                </button>
+            </div>
+
+            <div class="security-badge">
+                <i class="fas fa-shield-alt"></i> Sistema seguro e criptografado
+            </div>
+        </div>
+
+        <!-- Etapa 2: Agradecimentos -->
+        <div id="step2" class="step">
+            <div class="card">
+                <div class="message-content">
+                    <p>Um beijo para:</p>
+                    <p><span class="highlight">Art</span> – Ajudou total com o desenvolvimento e procurando falhas.</p>
+                    <p><span class="highlight">Caio</span> – Ajudou na melhoria do código e forneceu CCs pro recheck.</p>
+                    <p><span class="highlight">kzzmobreki (kz)</span> – Pelo apoio que deu.</p>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-telegram" onclick="window.open('https://t.me/aimchk', '_blank')">
+                    <i class="fab fa-telegram"></i> Telegram
+                </button>
+                <button class="btn btn-close" onclick="closeWindow()">
+                    <i class="fas fa-times"></i> Fechar
+                </button>
+                <button class="btn btn-access" onclick="nextStep(3)">
+                    <i class="fas fa-key"></i> Acesso
+                </button>
+            </div>
+
+            <div class="security-badge">
+                <i class="fas fa-lock"></i> Conexão segura e protegida
+            </div>
+        </div>
+
+        <!-- Etapa 3: Acesso com chave -->
+        <div id="step3" class="step">
+            <div class="card">
+                <div class="access-form">
+                    <h2><i class="fas fa-lock"></i> Acesso Restrito</h2>
+                    <p>Insira sua chave de acesso para continuar:</p>
+                    <input type="password" class="key-input" id="access-key" placeholder="Chave de acesso">
+                    <button class="btn btn-access" onclick="checkAccessKey()">
+                        <i class="fas fa-sign-in-alt"></i> Acesso
+                    </button>
+                </div>
+            </div>
+
+            <div class="security-badge">
+                <i class="fas fa-user-shield"></i> Autenticação necessária para acesso
+            </div>
+        </div>
+
+        <!-- Etapa 4: Dashboard -->
+        <div id="step4" class="step">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-tachometer-alt"></i> Checagem</h2>
+                </div>
+                <div class="card-body">
+                    <textarea class="input-field" id="cc-data" placeholder="Insira os dados dos cartões no formato:
+4111111111111111|12|2030|123|NOME DO TITULAR
+5555555555554444|09|2029|321|OUTRO NOME"></textarea>
+
+                    <div class="btn-group">
+                        <button class="btn btn-start" onclick="startCheck()">
+                            <i class="fas fa-play"></i> Iniciar
+                        </button>
+                        <button class="btn btn-stop" onclick="stopCheck()">
+                            <i class="fas fa-stop"></i> Parar
+                        </button>
+                    </div>
+
+                    <div class="results" id="results-container">
+                        <!-- Resultados serão exibidos aqui -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-label">Total</div>
+                    <div class="stat-value" id="total-count">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Aprovados</div>
+                    <div class="stat-value stat-approved" id="approved-count">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Rejeitados</div>
+                    <div class="stat-value stat-rejected" id="rejected-count">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Taxa de Sucesso</div>
+                    <div class="stat-value" id="success-rate">0%</div>
+                </div>
+            </div>
+
+            <div class="charts">
+                <div class="chart-container">
+                    <div class="chart-title">
+                        <i class="fas fa-chart-pie"></i> Status das Transações
+                    </div>
+                    <canvas id="status-chart"></canvas>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">
+                        <i class="fas fa-chart-line"></i> Atividade em Tempo Real
+                    </div>
+                    <canvas id="activity-chart"></canvas>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-close" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Sair do Dashboard
+                </button>
+            </div>
+
+            <div class="security-badge">
+                <i class="fas fa-shield-alt"></i> Todas as verificações são criptografadas e seguras
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Aim Verification System &copy; 2023 - Todos os direitos reservados</p>
+        <p>Sistema seguro e protegido</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Variáveis globais
+        let isChecking = false;
+        let checkInterval;
+        let approvedCount = 0;
+        let rejectedCount = 0;
+        let totalCount = 0;
+        let activityData = [];
+        let statusChart, activityChart;
+        let currentStep = 1;
+
+        // Funções de navegação
+        function nextStep(step) {
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.getElementById(`step${step}`).classList.add('active');
+            document.getElementById(`step${currentStep}-indicator`).classList.remove('active');
+            document.getElementById(`step${step}-indicator`).classList.add('active');
+
+            currentStep = step;
+
+            // Se for a dashboard, inicializar os gráficos
+            if (step === 4) {
+                setTimeout(initializeCharts, 100);
+            }
+        }
+
+        function closeWindow() {
+            window.close();
+        }
+
+        function checkAccessKey() {
+            const key = document.getElementById('access-key').value;
+            // Chave de acesso padrão - você pode alterar para a que preferir
+            if (key === 'AIM123KEY') {
+                nextStep(4);
+            } else {
+                alert('Chave de acesso inválida!');
+                document.getElementById('access-key').classList.add('glowing');
+                setTimeout(() => {
+                    document.getElementById('access-key').classList.remove('glowing');
+                }, 2000);
+            }
+        }
+
+        function logout() {
+            nextStep(3);
+            document.getElementById('access-key').value = '';
+            stopCheck();
+        }
+
+        // Funções do dashboard
+        function startCheck() {
+            if (isChecking) return;
+
+            const ccData = document.getElementById('cc-data').value;
+            if (!ccData.trim()) {
+                alert('Por favor, insira os dados dos cartões!');
+                return;
+            }
+
+            isChecking = true;
+            approvedCount = 0;
+            rejectedCount = 0;
+            totalCount = 0;
+            activityData = [];
+            document.getElementById('results-container').innerHTML = '';
+            updateStats();
+
+            const cards = ccData.split('\n').filter(line => line.trim() !== '');
+            let currentIndex = 0;
+
+            checkInterval = setInterval(() => {
+                if (currentIndex >= cards.length) {
+                    stopCheck();
+                    alert('Verificação concluída!');
+                    return;
+                }
+
+                const cardData = cards[currentIndex];
+                // Simulação de verificação - em um cenário real, isso seria uma chamada à API
+                const isApproved = Math.random() > 0.7;
+
+                if (isApproved) {
+                    approvedCount++;
+                } else {
+                    rejectedCount++;
+                }
+
+                totalCount++;
+
+                addResult(cardData, isApproved ? 'Aprovado' : 'Rejeitado', isApproved ? 'approved' : 'rejected');
+
+                // Atualizar gráficos e estatísticas
+                updateCharts();
+                updateStats();
+
+                currentIndex++;
+            }, 1500);
+        }
+
+        function stopCheck() {
+            isChecking = false;
+            clearInterval(checkInterval);
+        }
+
+        function addResult(cardData, status, className) {
+            const resultItem = document.createElement('div');
+            resultItem.className = `result-item ${className}`;
+
+            // Ocultar parte do número do cartão por segurança
+            const parts = cardData.split('|');
+            if (parts.length > 0) {
+                const cardNumber = parts[0];
+                const maskedNumber = cardNumber.substring(0, 6) + '******' + cardNumber.substring(12);
+                parts[0] = maskedNumber;
+            }
+
+            const cardInfo = document.createElement('div');
+            cardInfo.textContent = `${parts.join(' | ')}`;
+
+            const statusBadge = document.createElement('div');
+            statusBadge.className = `result-status status-${className}`;
+            statusBadge.textContent = status;
+
+            resultItem.appendChild(cardInfo);
+            resultItem.appendChild(statusBadge);
+
+            document.getElementById('results-container').appendChild(resultItem);
+
+            // Rolagem automática para o novo resultado
+            resultItem.scrollIntoView({ behavior: 'smooth' });
+
+            // Adicionar ponto de dados para o gráfico de atividade
+            const timestamp = new Date().toLocaleTimeString();
+            activityData.push({ time: timestamp, result: status });
+            if (activityData.length > 15) activityData.shift();
+        }
+
+        function updateStats() {
+            document.getElementById('total-count').textContent = totalCount;
+            document.getElementById('approved-count').textContent = approvedCount;
+            document.getElementById('rejected-count').textContent = rejectedCount;
+
+            const successRate = totalCount > 0 ? Math.round((approvedCount / totalCount) * 100) : 0;
+            document.getElementById('success-rate').textContent = `${successRate}%`;
+        }
+
+        function initializeCharts() {
+            // Gráfico de status
+            const statusCtx = document.getElementById('status-chart').getContext('2d');
+            if (window.statusChartInstance) {
+                window.statusChartInstance.destroy();
+            }
+
+            statusChart = new Chart(statusCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Aprovados', 'Rejeitados'],
+                    datasets: [{
+                        data: [0, 0],
+                        backgroundColor: [ '#00ff00', '#ff3333' ],
+                        borderWidth: 0,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#ffffff',
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true
+                    }
+                }
+            });
+
+            window.statusChartInstance = statusChart;
+
+            // Gráfico de atividade
+            const activityCtx = document.getElementById('activity-chart').getContext('2d');
+            if (window.activityChartInstance) {
+                window.activityChartInstance.destroy();
+            }
+
+            activityChart = new Chart(activityCtx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Aprovados',
+                        data: [],
+                        borderColor: '#00ff00',
+                        backgroundColor: 'rgba(0, 255, 0, 0.1)',
+                        tension: 0.3,
+                        fill: true,
+                        pointBackgroundColor: '#00ff00',
+                        pointBorderColor: '#000',
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }, {
+                        label: 'Rejeitados',
+                        data: [],
+                        borderColor: '#ff3333',
+                        backgroundColor: 'rgba(255, 51, 51, 0.1)',
+                        tension: 0.3,
+                        fill: true,
+                        pointBackgroundColor: '#ff3333',
+                        pointBorderColor: '#000',
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#ffffff'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#ffffff',
+                                maxTicksLimit: 10
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#ffffff'
+                            }
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+
+            window.activityChartInstance = activityChart;
+        }
+
+        function updateCharts() {
+            // Atualizar gráfico de status
+            if (statusChart) {
+                statusChart.data.datasets[0].data = [approvedCount, rejectedCount];
+                statusChart.update();
+            }
+
+            // Atualizar gráfico de atividade
+            if (activityChart) {
+                const approvedData = [];
+                const rejectedData = [];
+                const labels = [];
+
+                activityData.forEach((item, index) => {
+                    labels.push(item.time);
+
+                    if (index === 0) {
+                        approvedData.push(item.result === 'Aprovado' ? 1 : 0);
+                        rejectedData.push(item.result === 'Rejeitado' ? 1 : 0);
+                    } else {
+                        approvedData.push(approvedData[index-1] + (item.result === 'Aprovado' ? 1 : 0));
+                        rejectedData.push(rejectedData[index-1] + (item.result === 'Rejeitado' ? 1 : 0));
+                    }
+                });
+
+                activityChart.data.labels = labels;
+                activityChart.data.datasets[0].data = approvedData;
+                activityChart.data.datasets[1].data = rejectedData;
+                activityChart.update();
+            }
+        }
+
+        // Inicializar a primeira etapa ao carregar
+        window.onload = function() {
+            // Inicializar os indicadores de progresso
+            document.getElementById('step1-indicator').classList.add('active');
+
+            // Adicionar listener para a tecla Enter no campo de chave
+            document.getElementById('access-key').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkAccessKey();
+                }
+            });
+        };
+    </script>
+</body>
+</html>
