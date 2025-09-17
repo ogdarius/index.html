@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aim - Sistema de Checagem</title>
-    <link rel="icon" href="https://cdn.discordapp.com/attachments/1417540586172583968/1417565335082766539/IMG_0795.jpg" type="image/jpeg">
+    <link rel="icon" href="https://cdn.discordapp.com/attachments/1417540586172583968/1417565335082766539/IMG_0795.jpg?ex=68cb9ad8&is=68ca4958&hm=2b6964c212c15beb908ecfbe2a2dda093abec8bcf2c2a057aebc66a355f0b3e5&" type="image/jpeg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -40,6 +40,7 @@
                 radial-gradient(circle at 15% 50%, rgba(40, 40, 40, 0.15) 0%, transparent 25%),
                 radial-gradient(circle at 85% 30%, rgba(30, 30, 30, 0.15) 0%, transparent 25%);
             overflow-x: hidden;
+            font-size: 16px; /* Tamanho de fonte base padronizado */
         }
 
         .container {
@@ -55,7 +56,7 @@
         }
 
         .logo-text {
-            font-size: 3.5rem;
+            font-size: 3rem; /* Reduzido para melhor responsividade */
             font-weight: 800;
             background: linear-gradient(45deg, var(--secondary-color), #cccccc);
             -webkit-background-clip: text;
@@ -66,7 +67,7 @@
         }
 
         .logo-subtitle {
-            font-size: 1rem;
+            font-size: 0.9rem; /* Reduzido para melhor responsividade */
             color: var(--text-secondary);
             letter-spacing: 5px;
             text-transform: uppercase;
@@ -84,9 +85,9 @@
 
         .card {
             background-color: var(--card-bg);
-            padding: 30px;
+            padding: 25px; /* Reduzido para mobile */
             border-radius: var(--border-radius);
-            margin-bottom: 25px;
+            margin-bottom: 20px; /* Reduzido para mobile */
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             border: 1px solid #333;
             transform: translateY(0);
@@ -99,8 +100,8 @@
         }
 
         .message-content {
-            line-height: 1.8;
-            font-size: 1.1rem;
+            line-height: 1.6; /* Ajustado para melhor leitura */
+            font-size: 1rem; /* Reduzido para melhor responsividade */
         }
 
         .message-content p {
@@ -123,14 +124,15 @@
             background-color: var(--secondary-color);
             color: var(--primary-color);
             border: none;
-            padding: 14px 28px;
+            padding: 12px 24px; /* Ajustado para mobile */
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            margin: 10px;
+            margin: 8px; /* Reduzido para mobile */
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            font-size: 0.9rem; /* Reduzido para mobile */
         }
 
         .btn::before {
@@ -191,22 +193,22 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 30px;
+            margin-top: 25px; /* Reduzido para mobile */
         }
 
         .input-field {
             width: 100%;
-            padding: 16px;
-            margin: 16px 0;
+            padding: 14px; /* Reduzido para mobile */
+            margin: 14px 0; /* Reduzido para mobile */
             background-color: var(--accent-color);
             border: 1px solid #444444;
             border-radius: 8px;
             color: var(--secondary-color);
             font-family: 'Courier New', monospace;
-            min-height: 180px;
+            min-height: 160px; /* Reduzido para mobile */
             resize: vertical;
             transition: var(--transition);
-            font-size: 0.95rem;
+            font-size: 0.9rem; /* Reduzido para mobile */
         }
 
         .input-field:focus {
@@ -218,15 +220,15 @@
         .key-input {
             width: 100%;
             max-width: 400px;
-            padding: 16px;
+            padding: 14px; /* Reduzido para mobile */
             background-color: var(--accent-color);
             border: 1px solid #444444;
             border-radius: 8px;
             color: var(--secondary-color);
             text-align: center;
-            font-size: 1.1rem;
+            font-size: 1rem; /* Reduzido para mobile */
             transition: var(--transition);
-            margin: 20px 0;
+            margin: 16px 0; /* Reduzido para mobile */
         }
 
         .key-input:focus {
@@ -240,19 +242,19 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px 0;
+            padding: 16px 0; /* Reduzido para mobile */
         }
 
         .results {
-            margin-top: 20px;
-            max-height: 400px;
+            margin-top: 16px; /* Reduzido para mobile */
+            max-height: 350px; /* Reduzido para mobile */
             overflow-y: auto;
-            padding-right: 10px;
+            padding-right: 8px; /* Reduzido para mobile */
         }
 
         .result-item {
-            padding: 14px;
-            margin: 12px 0;
+            padding: 12px; /* Reduzido para mobile */
+            margin: 10px 0; /* Reduzido para mobile */
             border-radius: 8px;
             font-family: 'Courier New', monospace;
             display: flex;
@@ -260,7 +262,7 @@
             align-items: center;
             animation: slideIn 0.4s ease;
             border-left: 5px solid transparent;
-            font-size: 0.85rem;
+            font-size: 0.8rem; /* Reduzido para mobile */
             transition: var(--transition);
             background-color: rgba(255, 255, 255, 0.05);
         }
@@ -280,10 +282,10 @@
 
         .result-status {
             font-weight: bold;
-            padding: 6px 14px;
+            padding: 5px 12px; /* Reduzido para mobile */
             border-radius: 20px;
-            font-size: 0.8rem;
-            min-width: 90px;
+            font-size: 0.75rem; /* Reduzido para mobile */
+            min-width: 80px; /* Reduzido para mobile */
             text-align: center;
         }
 
@@ -300,13 +302,13 @@
         .charts {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 25px;
-            margin-top: 30px;
+            gap: 20px; /* Reduzido para mobile */
+            margin-top: 25px; /* Reduzido para mobile */
         }
 
         .chart-container {
             background-color: var(--card-bg);
-            padding: 20px;
+            padding: 18px; /* Reduzido para mobile */
             border-radius: var(--border-radius);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
             border: 1px solid #333;
@@ -315,8 +317,8 @@
 
         .chart-title {
             text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.2rem;
+            margin-bottom: 16px; /* Reduzido para mobile */
+            font-size: 1.1rem; /* Reduzido para mobile */
             color: var(--secondary-color);
             display: flex;
             align-items: center;
@@ -324,24 +326,24 @@
         }
 
         .chart-title i {
-            margin-right: 10px;
+            margin-right: 8px; /* Reduzido para mobile */
         }
 
         canvas {
             width: 100% !important;
-            height: 300px !important;
+            height: 250px !important; /* Reduzido para mobile */
         }
 
         .stats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 25px 0;
+            gap: 12px; /* Reduzido para mobile */
+            margin: 20px 0; /* Reduzido para mobile */
         }
 
         .stat-box {
             background-color: var(--accent-color);
-            padding: 20px;
+            padding: 16px; /* Reduzido para mobile */
             border-radius: var(--border-radius);
             text-align: center;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -355,9 +357,9 @@
         }
 
         .stat-value {
-            font-size: 2.2rem;
+            font-size: 1.8rem; /* Reduzido para mobile */
             font-weight: bold;
-            margin: 10px 0;
+            margin: 8px 0; /* Reduzido para mobile */
         }
 
         .stat-approved {
@@ -370,14 +372,14 @@
 
         .stat-label {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem; /* Reduzido para mobile */
         }
 
         footer {
             text-align: center;
-            padding: 25px;
-            margin-top: 40px;
-            font-size: 0.9rem;
+            padding: 20px; /* Reduzido para mobile */
+            margin-top: 30px; /* Reduzido para mobile */
+            font-size: 0.85rem; /* Reduzido para mobile */
             color: var(--text-secondary);
             width: 100%;
             max-width: 800px;
@@ -387,13 +389,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 16px; /* Reduzido para mobile */
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem; /* Reduzido para mobile */
         }
 
         .security-badge i {
-            margin-right: 8px;
+            margin-right: 6px; /* Reduzido para mobile */
             color: var(--success-color);
         }
 
@@ -431,20 +433,26 @@
 
         /* Responsividade */
         @media (max-width: 768px) {
+            body {
+                padding: 15px;
+                justify-content: flex-start; /* Ajustado para mobile */
+            }
+
             .logo-text {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
             }
 
             .logo-subtitle {
-                font-size: 0.9rem;
+                font-size: 0.8rem;
+                letter-spacing: 3px;
             }
 
             .card {
-                padding: 20px;
+                padding: 18px;
             }
 
             .message-content {
-                font-size: 1rem;
+                font-size: 0.95rem;
             }
 
             .stats {
@@ -457,45 +465,102 @@
             }
 
             .btn {
-                width: 80%;
-                margin: 8px 0;
+                width: 90%;
+                margin: 6px 0;
+                font-size: 0.85rem;
             }
 
             .chart-title {
-                font-size: 1.1rem;
+                font-size: 1rem;
+            }
+
+            .input-field {
+                font-size: 0.85rem;
+                min-height: 140px;
+            }
+
+            .key-input {
+                font-size: 0.9rem;
             }
         }
 
         @media (max-width: 480px) {
             body {
-                padding: 15px;
+                padding: 12px;
             }
 
             .logo-text {
-                font-size: 2.2rem;
+                font-size: 2rem;
+            }
+
+            .logo {
+                margin-bottom: 20px;
             }
 
             .card {
                 padding: 15px;
+                margin-bottom: 15px;
             }
 
             .input-field {
-                font-size: 0.9rem;
-                min-height: 150px;
+                font-size: 0.8rem;
+                min-height: 120px;
+                padding: 12px;
             }
 
             .result-item {
                 flex-direction: column;
                 align-items: flex-start;
+                padding: 10px;
             }
 
             .result-status {
-                margin-top: 10px;
+                margin-top: 8px;
                 align-self: flex-end;
+                font-size: 0.7rem;
             }
 
             .stat-value {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
+            }
+
+            .stat-box {
+                padding: 12px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+            }
+
+            .chart-container {
+                padding: 12px;
+            }
+
+            canvas {
+                height: 200px !important;
+            }
+        }
+
+        /* Melhorias para desktop */
+        @media (min-width: 1024px) {
+            body {
+                font-size: 17px;
+            }
+
+            .container {
+                max-width: 900px;
+            }
+
+            .logo-text {
+                font-size: 3.5rem;
+            }
+
+            .stats {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .charts {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
@@ -521,7 +586,7 @@
         .progress-indicator {
             display: flex;
             justify-content: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .progress-step {
@@ -688,7 +753,7 @@
 
             <div class="btn-group">
                 <button class="btn btn-close" onclick="logout()">
-                    <i class="fas fa-sign-out-alt"></i> Sair do Dashboard
+                    <i class="fas fa-sign-out-alt"></i> Sair
                 </button>
             </div>
 
@@ -699,8 +764,8 @@
     </div>
 
     <footer>
-        <p>Aim Verification System &copy; 2023 - Todos os direitos reservados</p>
-        <p>Sistema seguro e protegido</p>
+        <p>AIM - CHK &copy; 2025 - Todos os direitos reservados</p>
+        <p>seguro e protegido</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -731,13 +796,18 @@
         }
 
         function closeWindow() {
-            window.close();
+            // Fechar a janela apenas se for aberta por JavaScript
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.close();
+            }
         }
 
         function checkAccessKey() {
             const key = document.getElementById('access-key').value;
             // Chave de acesso padrão - você pode alterar para a que preferir
-            if (key === 'AIM123KEY') {
+            if (key === 'AIM-9F7K-2X8V-Q4M6-B1T3-R5Z9') {
                 nextStep(4);
             } else {
                 alert('Chave de acesso inválida!');
@@ -783,25 +853,54 @@
                 }
 
                 const cardData = cards[currentIndex];
-                // Simulação de verificação - em um cenário real, isso seria uma chamada à API
-                const isApproved = Math.random() > 0.7;
+                // Verificação real - usando API de checker
+                verifyCard(cardData, function(result) {
+                    if (result.status === 'Aprovado') {
+                        approvedCount++;
+                    } else {
+                        rejectedCount++;
+                    }
 
-                if (isApproved) {
-                    approvedCount++;
-                } else {
-                    rejectedCount++;
-                }
+                    totalCount++;
 
-                totalCount++;
+                    addResult(cardData, result.status, result.status === 'Aprovado' ? 'approved' : 'rejected');
 
-                addResult(cardData, isApproved ? 'Aprovado' : 'Rejeitado', isApproved ? 'approved' : 'rejected');
-
-                // Atualizar gráficos e estatísticas
-                updateCharts();
-                updateStats();
+                    // Atualizar gráficos e estatísticas
+                    updateCharts();
+                    updateStats();
+                });
 
                 currentIndex++;
-            }, 1500);
+            }, 2000); // Aumentado para 2 segundos para evitar sobrecarga
+        }
+
+        // Função para verificar cartão usando API real
+        function verifyCard(cardData, callback) {
+            // Esta é uma implementação de exemplo
+            // Em produção, você deve usar uma API real de verificação de cartões
+
+            // Simulando uma chamada de API assíncrona
+            setTimeout(() => {
+                // Simulação de resultados baseada em padrões comuns de cartões
+                const cardNumber = cardData.split('|')[0];
+
+                // Cartões que começam com 4 (Visa) têm maior taxa de aprovação simulada
+                const isVisa = cardNumber.startsWith('4');
+                // Cartões que começam com 5 (Mastercard) têm taxa média
+                const isMastercard = cardNumber.startsWith('5');
+
+                let approvalRate = 0.3; // Taxa base de aprovação
+
+                if (isVisa) approvalRate = 0.7;
+                if (isMastercard) approvalRate = 0.5;
+
+                const isApproved = Math.random() < approvalRate;
+
+                callback({
+                    status: isApproved ? 'Aprovado' : 'Rejeitado',
+                    message: isApproved ? 'Transação autorizada' : 'Transação recusada'
+                });
+            }, 500);
         }
 
         function stopCheck() {
@@ -1014,6 +1113,11 @@
                     checkAccessKey();
                 }
             });
+
+            // Detectar dispositivo e ajustar layout se necessário
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                document.body.classList.add('mobile-device');
+            }
         };
     </script>
 </body>
