@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apoia a nossa querida Gabi - Juntos nesta jornada</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variáveis de cores e configurações */
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #ff00ec;
+            --accent-color: #ff66f9;
+            --text-color: #ffffff;
+            --light-bg: #1a1a1a;
+            --card-bg: #2a2a2a;
+            --transition: all 0.3s ease;
+            --shadow: 0 4px 20px rgba(255, 0, 236, 0.2);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Reset e configurações básicas */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Container principal */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Botões */
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(255, 0, 236, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::after {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--secondary-color);
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: rgba(0, 0, 0, 0.95);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            text-shadow: 0 0 10px rgba(255, 0, 236, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { text-shadow: 0 0 10px rgba(255, 0, 236, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(255, 0, 236, 0.8); }
+            100% { text-shadow: 0 0 10px rgba(255, 0, 236, 0.5); }
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-left: 30px;
+        }
+
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            font-size: 1.05rem;
+        }
+
+        .nav-menu a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 20%, var(--primary-color) 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--secondary-color);
+            display: block;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 35px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Seções */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            display: inline-block;
+            position: relative;
+            font-weight: 600;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+
+        /* Sobre a Gabi */
+        .about {
+            background-color: var(--light-bg);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            animation: floatImage 4s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+            min-height: 400px;
+        }
+
+        @keyframes floatImage {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .about-image .icon-placeholder {
+            font-size: 8rem;
+            color: white;
+            opacity: 0.7;
+        }
+
+        /* Doação */
+        .donation {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a1a1a 100%);
+        }
+
+        .donation-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .donation-intro {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            text-align: center;
+            padding: 25px 20px;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            flex: 1;
+            min-width: 200px;
+            max-width: 250px;
+        }
+
+        .trust-badge:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .trust-badge i {
+            font-size: 2.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .trust-badge h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .donation-form-container {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .security-note {
+            background-color: rgba(0, 128, 0, 0.1);
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin: 25px 0;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-align: left;
+        }
+
+        .security-note i {
+            color: #4CAF50;
+            font-size: 1.5rem;
+        }
+
+        /* Mensagem de agradecimento */
+        .thank-you {
+            background-color: var(--light-bg);
+            text-align: center;
+        }
+
+        .thank-you-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .thank-you-icon {
+            font-size: 4rem;
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #111;
+            padding: 70px 0 25px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            color: var(--secondary-color);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: var(--card-bg);
+            border-radius: 50%;
+            color: var(--text-color);
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.95rem;
+        }
+
+        /* Animações de entrada */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: rgba(0, 0, 0, 0.98);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: var(--transition);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                margin: 20px 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .donation-form-container {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.95rem;
+            }
+
+            section {
+                padding: 70px 0;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-image {
+                min-height: 300px;
+            }
+
+            .about-image .icon-placeholder {
+                font-size: 5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Apoia a Gabi</div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#about">Sobre a Gabi</a></li>
+                    <li><a href="#donation">Fazer Doação</a></li>
+                    <li><a href="#thank-you">Agradecimento</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Juntos por Gabriela</h1>
+                <p>Gabi tem apenas 16 anos e enfrenta corajosamente uma rara doença hematológica. Sua jornada é de esperança, e sua recuperação depende de tratamentos especializados. Sua solidariedade pode transformar essa história.</p>
+                <a href="#donation" class="btn">Quero Apoiar a Gabi</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre a Gabi -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>A Jornada da Gabi</h2>
+            </div>
+            <div class="section-subtitle">
+                <p>Conheça a história de superação de Gabriela, uma jovem cheia de sonhos que enfrenta uma batalha importante com coragem e esperança.</p>
+            </div>
+            <div class="about-content fade-in">
+                <div class="about-text">
+                    <p>Gabriela, carinhosamente chamada de Gabi, é uma adolescente de 16 anos que sempre demonstrou paixão pela vida. Desde pequena, seu sorriso contagiante e energia contagiante iluminavam qualquer ambiente. Seus maiores sonhos envolviam dança e música, com aspirações de se tornar uma bailarina profissional.</p>
+                    <p>Há aproximadamente dois anos, sua vida tomou um rumo inesperado quando foi diagnosticada com uma condição hematológica rara e complexa. Esta doença, que se manifesta de dentro para fora, afeta profundamente seu sistema imunológico, causando fadiga debilitante, dores constantes e limitando sua capacidade de realizar até mesmo atividades cotidianas simples.</p>
+                    <p>Apesar dos desafios diários, Gabi mantém uma força impressionante e uma esperança inquebrável. Seu tratamento é extenso e requer cuidados especializados, incluindo medicamentos de alto custo, consultas com diversos especialistas e terapias complementares essenciais para sua qualidade de vida.</p>
+                    <p>Sua família dedica todos os recursos e energias para garantir o melhor tratamento possível, mas os custos são significativos. É nesse contexto que a solidariedade se torna fundamental para continuarmos essa jornada rumo à recuperação da Gabi.</p>
+                </div>
+                <div class="about-image">
+                    <div class="icon-placeholder">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Doação -->
+    <section id="donation" class="donation">
+        <div class="container">
+            <div class="section-title">
+                <h2>Faça Sua Doação</h2>
+            </div>
+            <div class="section-subtitle">
+                <p>Sua contribuição é fundamental para o tratamento contínuo da Gabi. Cada gesto de solidariedade faz uma diferença real em sua jornada de recuperação.</p>
+            </div>
+            <div class="donation-content fade-in">
+                <div class="donation-intro">
+                    <p>Optamos pelo <strong>PIX</strong> como forma de doação por ser um método rápido, seguro e que permite que 100% do valor chegue diretamente para o tratamento da Gabi, sem intermediários ou taxas adicionais.</p>
+                </div>
+
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Transparência Total</h3>
+                        <p>Todos os recursos são direcionados integralmente para o tratamento</p>
+                    </div>
+                    <div class="trust-badge">
+                        <i class="fas fa-lock"></i>
+                        <h3>Pagamento Seguro</h3>
+                        <p>Utilizamos gateway confiável para proteger suas informações</p>
+                    </div>
+                    <div class="trust-badge">
+                        <i class="fas fa-heart"></i>
+                        <h3>Impacto Real</h3>
+                        <p>Sua doação faz diferença direta na vida da Gabi</p>
+                    </div>
+                </div>
+
+                <div class="donation-form-container">
+                    <h3 style="margin-bottom: 30px; color: var(--secondary-color);">Clique no botão abaixo para fazer sua doação via PIX</h3>
+
+                    <div class="security-note">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Transação 100% Segura:</strong> Sua doação será processada através do PixGG, nosso parceiro de pagamento seguro.
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin: 30px 0;">
+                        <button class="btn" id="donate-btn" style="padding: 16px 50px; font-size: 1.2rem;">
+                            <i class="fas fa-heart" style="margin-right: 10px;"></i> Fazer Doação via PIX
+                        </button>
+                    </div>
+
+                    <p style="margin-top: 20px; font-size: 0.9rem; color: #aaa; text-align: center;">
+                        Ao clicar em "Fazer Doação via PIX", você será redirecionado para o PixGG para finalizar sua contribuição.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mensagem de agradecimento -->
+    <section id="thank-you" class="thank-you">
+        <div class="container">
+            <div class="thank-you-content fade-in">
+                <div class="thank-you-icon">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
+                <h2 style="margin-bottom: 20px; font-size: 2.5rem;">Gratidão que Transforma</h2>
+                <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 30px;">
+                    Cada gesto de solidariedade fortalece a Gabi em sua jornada. Sua contribuição não é apenas um apoio financeiro, mas um voto de confiança em sua recuperação. De toda a família da Gabi, nosso sincero agradecimento.
+                </p>
+                <p style="font-style: italic; color: var(--secondary-color);">
+                    "A gratidão é a memória do coração." - Jean Baptiste Massieu
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Apoia a Gabi</h3>
+                    <p>Junte-se a nós nesta jornada de esperança e solidariedade. Cada contribuição é um passo em direção à recuperação da Gabi.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="far fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Início</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> Sobre a Gabi</a></li>
+                        <li><a href="#donation"><i class="fas fa-chevron-right"></i> Fazer Doação</a></li>
+                        <li><a href="#thank-you"><i class="fas fa-chevron-right"></i> Agradecimento</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Entre em Contato</h3>
+                    <ul>
+                        <li><a href="mailto:contato@apoiaagabi.com"><i class="far fa-envelope"></i> contato@apoiaagabi.com</a></li>
+                        <li><a href="tel:+55639103274608"><i class="fas fa-phone"></i> (63) 91032-74608</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Salvador, Brasil</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Apoia a nossa querida Gabi. Todos os direitos reservados. | Desenvolvido com <i class="fas fa-heart" style="color: var(--secondary-color);"></i> para fazer a diferença</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        });
+
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-menu').classList.remove('active');
+            });
+        });
+
+        // Animação de entrada dos elementos
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(element => {
+            fadeInObserver.observe(element);
+        });
+
+        // Botão de doação - REDIRECIONAMENTO CORRIGIDO
+        document.getElementById('donate-btn').addEventListener('click', function() {
+            // URL do gateway PixGG configurado
+            const gatewayUrl = 'https://pixgg.com/gang';
+
+            // Redirecionar imediatamente para o gateway de pagamento
+            window.location.href = gatewayUrl;
+        });
+
+        // Efeito de digitação no título
+        const heroTitle = document.querySelector('.hero h1');
+        const originalText = heroTitle.innerHTML;
+
+        // Simular efeito de digitação ao carregar a página
+        window.addEventListener('load', function() {
+            heroTitle.style.opacity = '0';
+            heroTitle.innerHTML = '';
+
+            let i = 0;
+            const typeWriter = () => {
+                if (i < originalText.length) {
+                    heroTitle.innerHTML += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                } else {
+                    heroTitle.style.opacity = '1';
+                }
+            };
+
+            setTimeout(typeWriter, 1000);
+        });
+    </script>
+</body>
+</html>
